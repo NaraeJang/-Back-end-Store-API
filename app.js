@@ -2,8 +2,9 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
-const products = require("./routes/products");
+
 const connectDB = require("./db/connect");
+const productsRouter = require("./routes/products");
 
 const notFoundMiddleware = require("./middleware/not-found");
 const errorMiddleware = require("./middleware/error-handler");
@@ -17,13 +18,13 @@ app.get("/", (req, res) => {
 });
 
 // PRODUCT ROUTES
-app.use("/api/v1/products", products);
+app.use("/api/v1/products", productsRouter);
 
 // Error
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 const start = async () => {
   try {
